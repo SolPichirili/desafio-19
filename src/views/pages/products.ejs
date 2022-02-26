@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+</head>
+
+<body>
+    <h1>Ver los productos en la consola</h1>
+    <script>
+        fetch("http://localhost:8080/api/productosGraphql?", {
+            "headers": {
+                "content-type": "application/json"
+            },
+            "body": "{\"query\":\"query{\\n  getAll {\\n    _id\\n    name\\n    description\\n    code\\n    photo\\n    price\\n    stock\\n  }\\n}\\n\\n\\n\\n\\n\\n\",\"variables\":null}",
+            "method": "POST"
+        })
+            .then((response) => response.json())
+            .then(({ data }) => console.log(data))
+            .catch(console.error);
+
+        fetch("http://localhost:8080/api/productosGraphql?", {
+            "headers": {
+                "content-type": "application/json"
+            },
+            "body": "{\"query\":\"mutation{\\n  deleteById(_id: \\\"621035ae1670fa6489ad8c77\\\") {\\n    name\\n    description\\n    code\\n    photo\\n    price\\n    stock\\n  }\\n}\\n\\n\\n\\n\\n\\n\",\"variables\":null}",
+            "method": "POST"
+        })
+            .then((response)=> response.json())
+            .then(({data})=> console.log(data))
+            .catch(console.error);
+
+        fetch("http://localhost:8080/api/productosGraphql?", {
+            "headers": {
+                "content-type": "application/json"
+            },
+            "body": "{\"query\":\"mutation{\\n  save(\\n    name:\\\"torta matilda\\\"\\n    description:\\\"torta con chocolate y dulce de leche\\\"\\n    code:303\\n    photo:\\\"https://www.clarin.com/img/2019/06/29/ah1D7AiQR_340x340__1.jpg\\\"\\n    price:\\\"4000\\\"\\n    stock:\\\"3\\\"\\n  ) {\\n    name\\n    description\\n    code\\n    photo\\n    price\\n    stock\\n  }\\n}\\n\\n\\n\\n\\n\\n\",\"variables\":null}",
+            "method": "POST"
+        })
+        .then((response)=> response.json())
+        .then(({data})=> console.log(data))
+        .catch(console.error)
+    </script>
+</body>
+
+</html>
